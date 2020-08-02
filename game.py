@@ -33,7 +33,6 @@ class Game(object):
 
 
 if __name__ == '__main__':
-  from matplotlib import pyplot as plt
   import numpy as np
 
   names = ["A", "B", "C", "D"]
