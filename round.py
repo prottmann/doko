@@ -8,7 +8,7 @@ class Round(object):
     super(Round, self).__init__()
     self.cards = list(Deck.cards)
     self.cards_per_player = len(self.cards) // 4
-    self.tricks = []
+    self.tricks = {}
     self.game = game
     self.reset()
 
@@ -42,6 +42,8 @@ class Round(object):
       for card_id in player.cards:
         if Deck.cards[card_id].name == 'Kreuz-Dame':
           player.kreuz_dame_counter += 1
+        if Deck.cards[card_id].is_trumpf:
+          player.trumpf_counter += 1
 
   def reset(self):
     self.trick_count = 0

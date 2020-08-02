@@ -33,8 +33,12 @@ class Game(object):
 
 
 if __name__ == '__main__':
+  from matplotlib import pyplot as plt
+  import numpy as np
+
   names = ["A", "B", "C", "D"]
   g = Game()
+  trumpf = []
   for id in range(4):
     g.add_player(names[id], id)
   g.start_round()
