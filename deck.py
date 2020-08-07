@@ -18,7 +18,7 @@ class Deck:
 
   TRUMPF_RANK = []
   start_id = 0
-  if TRUMPF[0] is "Herz-10":
+  if TRUMPF[0] == "Herz-10":
     TRUMPF_RANK.append(TRUMPF[0])
     start_id = 1
   for id in range(start_id, len(TRUMPF)):
