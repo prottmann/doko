@@ -17,7 +17,7 @@ class Card(object):
 
   def __eq__(self, other):
     """Checking if cards are equal"""
-    return self.name is other.name
+    return self.name == other.name
 
   def __ne__(self, other):
     """Checking if cards are not equal"""
@@ -28,6 +28,8 @@ class Card(object):
     from deck import Deck
     if self.is_trumpf and not other.is_trumpf:
       return True
+    elif not self.is_trumpf and other.is_trumpf:
+      return False
     elif self.is_trumpf and other.is_trumpf:
       if Deck.TRUMPF_RANK.index(self.name) < Deck.TRUMPF_RANK.index(other.name):
         return True
@@ -35,10 +37,10 @@ class Card(object):
         return False
     else:
       s = list(Deck.SYMBOLS.keys())
-      if s.index(self.symbol) > s.index(self.symbol):
+      if Deck.COLORS.index(self.color) < Deck.COLORS.index(other.color):
         return True
-      elif s.index(self.symbol) == s.index(self.symbol):
-        if Deck.COLORS.index(self.color) < Deck.COLORS.index(self.color):
+      elif Deck.COLORS.index(self.color) == Deck.COLORS.index(other.color):
+        if s.index(self.symbol) < s.index(other.symbol):
           return True
         else:
           return False

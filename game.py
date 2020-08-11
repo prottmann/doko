@@ -22,8 +22,12 @@ class Game(object):
     self.order.remove(player_id)
     del self.players[player_id]
 
+  def rotate_order(self):
+    self.order.append(self.order.pop(0))
+
   def start_round(self):
     r = Round(self)
+    self.rotate_order()
 
   def __str__(self):
     res = "Game:\n"
@@ -38,7 +42,7 @@ if __name__ == '__main__':
   names = ["A", "B", "C", "D"]
   g = Game()
   trumpf = []
-  for id in range(4):
-    g.add_player(names[id], id)
+  for id in range(10, 14):
+    g.add_player(names[id - 10], id)
   g.start_round()
-  print(g.players[0])
+  #print(g.players[g.order[0]])

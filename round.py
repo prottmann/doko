@@ -1,5 +1,8 @@
 import random
 from deck import Deck
+from trick import Trick
+
+random.seed(42)
 
 
 class Round(object):
@@ -11,15 +14,29 @@ class Round(object):
     self.tricks = {}
     self.game = game
     self.reset()
+    for i in range(self.cards_per_player):
+      self.play_trick()
 
   def play_trick(self):
-    pass
+    self.trick_count += 1
+    trick = Trick(self.trick_count, self.game)
+    self.tricks[self.trick_count] = trick
+    trick.run(self.trick_order())
+    w = trick.get_trick_winner()
+    print(f"{self.game.players[w].name} won this trick!")
 
   def count(self):
     pass
 
   def trick_order(self):
-    pass
+    p = list(self.game.players)
+    if self.trick_count == 0:
+      order = p
+    else:
+      w = self.get_last_trick().get_trick_winner()
+      idx = p.index(w)
+      order = p[idx:] + p[:idx]
+    return order
 
   def get_current_trick(self):
     return self.tricks[self.trick_count]
@@ -46,8 +63,7 @@ class Round(object):
           player.trumpf_counter += 1
 
   def reset(self):
-    self.trick_count = 0
-    self.trick_count = 0
+    self.trick_count = -1
     self.shuffle()
     self.deal()
 
