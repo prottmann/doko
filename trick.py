@@ -21,7 +21,7 @@ class Trick(object):
   def add_turn(self, player_id, card_id):
     currPlayer = self.game.players[player_id]
     self.players.append(player_id)
-    self.cards.append(currPlayer.play_lowest_card(self))
+    self.cards.append(currPlayer.play_random_card(self))
 
   def is_last_turn(self):
     return len(players) > 3

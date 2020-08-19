@@ -1,5 +1,6 @@
 from deck import Deck
 import numpy as np
+import random
 
 
 class Player(object):
@@ -11,19 +12,23 @@ class Player(object):
     self.score = 0
     self.reset()
 
-  def play_card(self, card_id):
-    valid_cards, valid_ids = self.get_valid_cards()
+  def play_card(self, current_trick, card_id):
+    valid_cards, valid_ids = self.get_valid_cards(current_trick)
     if card_id not in valid_ids:
       raise ValueError("Selected Card is not valid. Select another one.")
     return self.cards.pop(self.cards.index(card_id))
 
-  def play_highest_card(self):
-    valid_cards, valid_ids = self.get_valid_cards()
+  def play_highest_card(self, current_trick):
+    valid_cards, valid_ids = self.get_valid_cards(current_trick)
     return self.cards.pop(self.cards.index(valid_ids[0]))
 
   def play_lowest_card(self, current_trick):
     valid_cards, valid_ids = self.get_valid_cards(current_trick)
     return self.cards.pop(self.cards.index(valid_ids[-1]))
+
+  def play_random_card(self, current_trick):
+    valid_cards, valid_ids = self.get_valid_cards(current_trick)
+    return self.cards.pop(self.cards.index(random.choice(valid_ids)))
 
   def get_valid_cards(self, current_trick):
     card_objs = self.get_cards()
